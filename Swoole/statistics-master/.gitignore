@@ -1,0 +1,5 @@
+*.pid
+*.log
+data/*
+Config/Cache/*
+data/statistic/*
