@@ -1,0 +1,5 @@
+#!/usr/bin/env php
+<?php
+require_once dirname(__DIR__) . '/src/base.php';
+$console = new \mapgoo\console\Console();
+$console->run();

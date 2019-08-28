@@ -1,0 +1,382 @@
+messageId:986d0856-e9dc-4840-94ba-8660b06493d1:Array
+(
+    [messageId] => 986d0856-e9dc-4840-94ba-8660b06493d1
+    [soureType] => 123
+    [requestType] => 0
+    [callbackUrl] => 
+    [priority] => 8
+    [params] => Array
+        (
+            [iccid] => 89860618000009770624
+            [changeType] => 3
+            [targetValue] => ACTIVATED_NAME
+        )
+
+)
+messageId:986d0856-e9dc-4840-94ba-8660b06493d1:Array
+(
+    [messageId] => 986d0856-e9dc-4840-94ba-8660b06493d1
+    [soureType] => 123
+    [requestType] => 0
+    [callbackUrl] => 
+    [priority] => 8
+    [params] => Array
+        (
+            [iccid] => 89860618000009770624
+            [changeType] => 3
+            [targetValue] => ACTIVATED_NAME
+        )
+
+)
+[2018-11-01 10:16:25 #23256.4]	NOTICE	Server is shutdown now.
+PHP Fatal error:  Uncaught ErrorException: Undefined variable: Ice__t_Object in /usr/local/mapgoo/release/mlb/v0.9.0/lib/php/BSS.php:65
+Stack trace:
+#0 [internal function]: mapgoo\base\ErrorHandler->handlerFatalError()
+#1 {main}
+  thrown in /usr/local/mapgoo/release/mlb/v0.9.0/lib/php/BSS.php on line 65
+messageId:986d0856-e9dc-4840-94ba-8660b06493d1:Array
+(
+    [messageId] => 986d0856-e9dc-4840-94ba-8660b06493d1
+    [soureType] => 123
+    [requestType] => 0
+    [callbackUrl] => 
+    [priority] => 8
+    [params] => Array
+        (
+            [iccid] => 89860618000009770624
+            [changeType] => 3
+            [targetValue] => ACTIVATED_NAME
+        )
+
+)
+response messageId:986d0856-e9dc-4840-94ba-8660b06493d1:{"code":0,"reason":"SUCCESS","messageId":"986d0856-e9dc-4840-94ba-8660b06493d1","timestamp":"2018-11-01 10:18:51","result":{"iccid":"89860618000009770624","effectiveDate":"2018-11-01"}}messageId:986d0856-e9dc-4840-94ba-8660b06493d1:Array
+(
+    [messageId] => 986d0856-e9dc-4840-94ba-8660b06493d1
+    [soureType] => 123
+    [requestType] => 0
+    [callbackUrl] => 
+    [priority] => 8
+    [params] => Array
+        (
+            [iccid] => 89860618000009770624
+            [changeType] => 3
+            [targetValue] => ACTIVATED_NAME
+        )
+
+)
+response messageId:986d0856-e9dc-4840-94ba-8660b06493d1:{"code":0,"reason":"SUCCESS","messageId":"986d0856-e9dc-4840-94ba-8660b06493d1","timestamp":"2018-11-01 10:18:59","result":{"iccid":"89860618000009770624","effectiveDate":"2018-11-01"}}messageId:986d0856-e9dc-4840-94ba-8660b06493d1:Array
+(
+    [messageId] => 986d0856-e9dc-4840-94ba-8660b06493d1
+    [soureType] => 123
+    [requestType] => 0
+    [callbackUrl] => 
+    [priority] => 8
+    [params] => Array
+        (
+            [iccid] => 89860618000009770624
+            [changeType] => 3
+            [targetValue] => ACTIVATED_NAME
+        )
+
+)
+response messageId:986d0856-e9dc-4840-94ba-8660b06493d1:{"code":0,"reason":"SUCCESS","messageId":"986d0856-e9dc-4840-94ba-8660b06493d1","timestamp":"2018-11-01 10:19:01","result":{"iccid":"89860618000009770624","effectiveDate":"2018-11-01"}}messageId:986d0856-e9dc-4840-94ba-8660b06493d1:Array
+(
+    [messageId] => 986d0856-e9dc-4840-94ba-8660b06493d1
+    [soureType] => 123
+    [requestType] => 0
+    [callbackUrl] => 
+    [priority] => 8
+    [params] => Array
+        (
+            [iccid] => 89860618000009770624
+            [changeType] => 3
+            [targetValue] => ACTIVATED_NAME
+        )
+
+)
+response messageId:986d0856-e9dc-4840-94ba-8660b06493d1:{"code":0,"reason":"SUCCESS","messageId":"986d0856-e9dc-4840-94ba-8660b06493d1","timestamp":"2018-11-01 10:19:02","result":{"iccid":"89860618000009770624","effectiveDate":"2018-11-01"}}messageId:986d0856-e9dc-4840-94ba-8660b06493d1:Array
+(
+    [messageId] => 986d0856-e9dc-4840-94ba-8660b06493d1
+    [soureType] => 123
+    [requestType] => 0
+    [callbackUrl] => 
+    [priority] => 8
+    [params] => Array
+        (
+            [iccid] => 89860618000009770624
+            [changeType] => 3
+            [targetValue] => ACTIVATED_NAME
+        )
+
+)
+response messageId:986d0856-e9dc-4840-94ba-8660b06493d1:{"code":0,"reason":"SUCCESS","messageId":"986d0856-e9dc-4840-94ba-8660b06493d1","timestamp":"2018-11-01 10:19:03","result":{"iccid":"89860618000009770624","effectiveDate":"2018-11-01"}}messageId:986d0856-e9dc-4840-94ba-8660b06493d1:Array
+(
+    [messageId] => 986d0856-e9dc-4840-94ba-8660b06493d1
+    [soureType] => 123
+    [requestType] => 0
+    [callbackUrl] => 
+    [priority] => 8
+    [params] => Array
+        (
+            [iccid] => 89860618000009770624
+            [changeType] => 3
+            [targetValue] => ACTIVATED_NAME
+        )
+
+)
+response messageId:986d0856-e9dc-4840-94ba-8660b06493d1:{"code":0,"reason":"SUCCESS","messageId":"986d0856-e9dc-4840-94ba-8660b06493d1","timestamp":"2018-11-01 10:19:04","result":{"iccid":"89860618000009770624","effectiveDate":"2018-11-01"}}messageId:986d0856-e9dc-4840-94ba-8660b06493d1:Array
+(
+    [messageId] => 986d0856-e9dc-4840-94ba-8660b06493d1
+    [soureType] => 123
+    [requestType] => 0
+    [callbackUrl] => 
+    [priority] => 8
+    [params] => Array
+        (
+            [iccid] => 89860618000009770624
+            [changeType] => 3
+            [targetValue] => ACTIVATED_NAME
+        )
+
+)
+response messageId:986d0856-e9dc-4840-94ba-8660b06493d1:{"code":0,"reason":"SUCCESS","messageId":"986d0856-e9dc-4840-94ba-8660b06493d1","timestamp":"2018-11-01 10:19:05","result":{"iccid":"89860618000009770624","effectiveDate":"2018-11-01"}}messageId:986d0856-e9dc-4840-94ba-8660b06493d1:Array
+(
+    [messageId] => 986d0856-e9dc-4840-94ba-8660b06493d1
+    [soureType] => 123
+    [requestType] => 0
+    [callbackUrl] => 
+    [priority] => 8
+    [params] => Array
+        (
+            [iccid] => 89860618000009770624
+            [changeType] => 3
+            [targetValue] => ACTIVATED_NAME
+        )
+
+)
+response messageId:986d0856-e9dc-4840-94ba-8660b06493d1:{"code":0,"reason":"SUCCESS","messageId":"986d0856-e9dc-4840-94ba-8660b06493d1","timestamp":"2018-11-01 10:19:06","result":{"iccid":"89860618000009770624","effectiveDate":"2018-11-01"}}messageId:986d0856-e9dc-4840-94ba-8660b06493d1:Array
+(
+    [messageId] => 986d0856-e9dc-4840-94ba-8660b06493d1
+    [soureType] => 123
+    [requestType] => 0
+    [callbackUrl] => 
+    [priority] => 8
+    [params] => Array
+        (
+            [iccid] => 89860618000009770624
+            [changeType] => 3
+            [targetValue] => ACTIVATED_NAME
+        )
+
+)
+response messageId:986d0856-e9dc-4840-94ba-8660b06493d1:{"code":0,"reason":"SUCCESS","messageId":"986d0856-e9dc-4840-94ba-8660b06493d1","timestamp":"2018-11-01 10:19:07","result":{"iccid":"89860618000009770624","effectiveDate":"2018-11-01"}}messageId:986d0856-e9dc-4840-94ba-8660b06493d1:Array
+(
+    [messageId] => 986d0856-e9dc-4840-94ba-8660b06493d1
+    [soureType] => 123
+    [requestType] => 0
+    [callbackUrl] => 
+    [priority] => 8
+    [params] => Array
+        (
+            [iccid] => 89860618000009770624
+            [changeType] => 3
+            [targetValue] => ACTIVATED_NAME
+        )
+
+)
+response messageId:986d0856-e9dc-4840-94ba-8660b06493d1:{"code":0,"reason":"SUCCESS","messageId":"986d0856-e9dc-4840-94ba-8660b06493d1","timestamp":"2018-11-01 10:19:09","result":{"iccid":"89860618000009770624","effectiveDate":"2018-11-01"}}messageId:986d0856-e9dc-4840-94ba-8660b06493d1:Array
+(
+    [messageId] => 986d0856-e9dc-4840-94ba-8660b06493d1
+    [soureType] => 123
+    [requestType] => 0
+    [callbackUrl] => 
+    [priority] => 8
+    [params] => Array
+        (
+            [iccid] => 89860618000009770624
+            [changeType] => 3
+            [targetValue] => ACTIVATED_NAME
+        )
+
+)
+response messageId:986d0856-e9dc-4840-94ba-8660b06493d1:{"code":0,"reason":"SUCCESS","messageId":"986d0856-e9dc-4840-94ba-8660b06493d1","timestamp":"2018-11-01 10:19:10","result":{"iccid":"89860618000009770624","effectiveDate":"2018-11-01"}}messageId:986d0856-e9dc-4840-94ba-8660b06493d1:Array
+(
+    [messageId] => 986d0856-e9dc-4840-94ba-8660b06493d1
+    [soureType] => 123
+    [requestType] => 0
+    [callbackUrl] => 
+    [priority] => 8
+    [params] => Array
+        (
+            [iccid] => 89860618000009770624
+            [changeType] => 3
+            [targetValue] => ACTIVATED_NAME
+        )
+
+)
+response messageId:986d0856-e9dc-4840-94ba-8660b06493d1:{"code":0,"reason":"SUCCESS","messageId":"986d0856-e9dc-4840-94ba-8660b06493d1","timestamp":"2018-11-01 10:19:11","result":{"iccid":"89860618000009770624","effectiveDate":"2018-11-01"}}messageId:986d0856-e9dc-4840-94ba-8660b06493d1:Array
+(
+    [messageId] => 986d0856-e9dc-4840-94ba-8660b06493d1
+    [soureType] => 123
+    [requestType] => 0
+    [callbackUrl] => 
+    [priority] => 8
+    [params] => Array
+        (
+            [iccid] => 89860618000009770624
+            [changeType] => 3
+            [targetValue] => ACTIVATED_NAME
+        )
+
+)
+response messageId:986d0856-e9dc-4840-94ba-8660b06493d1:{"code":0,"reason":"SUCCESS","messageId":"986d0856-e9dc-4840-94ba-8660b06493d1","timestamp":"2018-11-01 10:19:13","result":{"iccid":"89860618000009770624","effectiveDate":"2018-11-01"}}messageId:986d0856-e9dc-4840-94ba-8660b06493d1:Array
+(
+    [messageId] => 986d0856-e9dc-4840-94ba-8660b06493d1
+    [soureType] => 123
+    [requestType] => 0
+    [callbackUrl] => 
+    [priority] => 8
+    [params] => Array
+        (
+            [iccid] => 89860618000009770624
+            [changeType] => 3
+            [targetValue] => ACTIVATED_NAME
+        )
+
+)
+response messageId:986d0856-e9dc-4840-94ba-8660b06493d1:{"code":0,"reason":"SUCCESS","messageId":"986d0856-e9dc-4840-94ba-8660b06493d1","timestamp":"2018-11-01 10:19:23","result":{"iccid":"89860618000009770624","effectiveDate":"2018-11-01"}}messageId:986d0856-e9dc-4840-94ba-8660b06493d1:Array
+(
+    [messageId] => 986d0856-e9dc-4840-94ba-8660b06493d1
+    [soureType] => 123
+    [requestType] => 0
+    [callbackUrl] => 
+    [priority] => 8
+    [params] => Array
+        (
+            [iccid] => 89860618000009770624
+            [changeType] => 3
+            [targetValue] => ACTIVATED_NAME
+        )
+
+)
+response messageId:986d0856-e9dc-4840-94ba-8660b06493d1:{"code":0,"reason":"SUCCESS","messageId":"986d0856-e9dc-4840-94ba-8660b06493d1","timestamp":"2018-11-01 10:19:24","result":{"iccid":"89860618000009770624","effectiveDate":"2018-11-01"}}messageId:986d0856-e9dc-4840-94ba-8660b06493d1:Array
+(
+    [messageId] => 986d0856-e9dc-4840-94ba-8660b06493d1
+    [soureType] => 123
+    [requestType] => 0
+    [callbackUrl] => 
+    [priority] => 8
+    [params] => Array
+        (
+            [iccid] => 89860618000009770624
+            [changeType] => 3
+            [targetValue] => ACTIVATED_NAME
+        )
+
+)
+response messageId:986d0856-e9dc-4840-94ba-8660b06493d1:{"code":0,"reason":"SUCCESS","messageId":"986d0856-e9dc-4840-94ba-8660b06493d1","timestamp":"2018-11-01 10:19:25","result":{"iccid":"89860618000009770624","effectiveDate":"2018-11-01"}}messageId:986d0856-e9dc-4840-94ba-8660b06493d1:Array
+(
+    [messageId] => 986d0856-e9dc-4840-94ba-8660b06493d1
+    [soureType] => 123
+    [requestType] => 0
+    [callbackUrl] => 
+    [priority] => 8
+    [params] => Array
+        (
+            [iccid] => 89860618000009770624
+            [changeType] => 3
+            [targetValue] => ACTIVATED_NAME
+        )
+
+)
+response messageId:986d0856-e9dc-4840-94ba-8660b06493d1:{"code":0,"reason":"SUCCESS","messageId":"986d0856-e9dc-4840-94ba-8660b06493d1","timestamp":"2018-11-01 10:19:27","result":{"iccid":"89860618000009770624","effectiveDate":"2018-11-01"}}messageId:986d0856-e9dc-4840-94ba-8660b06493d1:Array
+(
+    [messageId] => 986d0856-e9dc-4840-94ba-8660b06493d1
+    [soureType] => 123
+    [requestType] => 0
+    [callbackUrl] => 
+    [priority] => 8
+    [params] => Array
+        (
+            [iccid] => 89860618000009770624
+            [changeType] => 3
+            [targetValue] => ACTIVATED_NAME
+        )
+
+)
+messageId:d645b222-cc59-4c63-b451-77cce5ced528:Array
+(
+    [messageId] => d645b222-cc59-4c63-b451-77cce5ced528
+    [soureType] => 123
+    [requestType] => 0
+    [callbackUrl] => 
+    [priority] => 8
+    [params] => Array
+        (
+            [iccid] => 89860618000009770624
+            [changeType] => 3
+            [targetValue] => ACTIVATED_NAME
+        )
+
+)
+response messageId:986d0856-e9dc-4840-94ba-8660b06493d1:{"code":0,"reason":"SUCCESS","messageId":"986d0856-e9dc-4840-94ba-8660b06493d1","timestamp":"2018-11-01 10:19:28","result":{"iccid":"89860618000009770624","effectiveDate":"2018-11-01"}}messageId:986d0856-e9dc-4840-94ba-8660b06493d1:Array
+(
+    [messageId] => 986d0856-e9dc-4840-94ba-8660b06493d1
+    [soureType] => 123
+    [requestType] => 0
+    [callbackUrl] => 
+    [priority] => 8
+    [params] => Array
+        (
+            [iccid] => 89860618000009770624
+            [changeType] => 3
+            [targetValue] => ACTIVATED_NAME
+        )
+
+)
+response messageId:d645b222-cc59-4c63-b451-77cce5ced528:{"code":0,"reason":"SUCCESS","messageId":"d645b222-cc59-4c63-b451-77cce5ced528","timestamp":"2018-11-01 10:19:29","result":{"iccid":"89860618000009770624","effectiveDate":"2018-11-01"}}messageId:8a8bcf90-60c8-4b54-98ec-15cddc9b9dbf:Array
+(
+    [messageId] => 8a8bcf90-60c8-4b54-98ec-15cddc9b9dbf
+    [soureType] => 123
+    [requestType] => 0
+    [callbackUrl] => 
+    [priority] => 8
+    [params] => Array
+        (
+            [iccid] => 89860618000009770624
+            [changeType] => 4
+            [targetValue] => ALIBABA_MON-FLEX_100M
+        )
+
+)
+response messageId:986d0856-e9dc-4840-94ba-8660b06493d1:{"code":0,"reason":"SUCCESS","messageId":"986d0856-e9dc-4840-94ba-8660b06493d1","timestamp":"2018-11-01 10:19:29","result":{"iccid":"89860618000009770624","effectiveDate":"2018-11-01"}}response messageId:8a8bcf90-60c8-4b54-98ec-15cddc9b9dbf:{"code":0,"reason":"SUCCESS","messageId":"8a8bcf90-60c8-4b54-98ec-15cddc9b9dbf","timestamp":"2018-11-01 10:19:30","result":{"iccid":"89860618000009770624","effectiveDate":"2018-11-01"}}messageId:986d0856-e9dc-4840-94ba-8660b06493d1:Array
+(
+    [messageId] => 986d0856-e9dc-4840-94ba-8660b06493d1
+    [soureType] => 123
+    [requestType] => 0
+    [callbackUrl] => 
+    [priority] => 8
+    [params] => Array
+        (
+            [iccid] => 89860618000009770624
+            [changeType] => 3
+            [targetValue] => ACTIVATED_NAME
+        )
+
+)
+response messageId:986d0856-e9dc-4840-94ba-8660b06493d1:{"code":0,"reason":"SUCCESS","messageId":"986d0856-e9dc-4840-94ba-8660b06493d1","timestamp":"2018-11-01 10:19:31","result":{"iccid":"89860618000009770624","effectiveDate":"2018-11-01"}}messageId:986d0856-e9dc-4840-94ba-8660b06493d1:Array
+(
+    [messageId] => 986d0856-e9dc-4840-94ba-8660b06493d1
+    [soureType] => 123
+    [requestType] => 0
+    [callbackUrl] => 
+    [priority] => 8
+    [params] => Array
+        (
+            [iccid] => 89860618000009770624
+            [changeType] => 3
+            [targetValue] => ACTIVATED_NAME
+        )
+
+)
+response messageId:986d0856-e9dc-4840-94ba-8660b06493d1:{"code":0,"reason":"SUCCESS","messageId":"986d0856-e9dc-4840-94ba-8660b06493d1","timestamp":"2018-11-01 10:25:00","result":{"iccid":"89860618000009770624","effectiveDate":"2018-11-01"}}response messageId:0:{"code":200,"reason":"mapgoo","messageId":0,"timestamp":"2018-11-01 10:52:42","result":{}}response messageId:0:{"code":200,"reason":"mapgoo","messageId":0,"timestamp":"2018-11-01 10:52:42","result":{}}response messageId:0:{"code":200,"reason":"mapgoo","messageId":0,"timestamp":"2018-11-01 10:52:43","result":{}}response messageId:0:{"code":200,"reason":"mapgoo","messageId":0,"timestamp":"2018-11-01 10:52:44","result":{}}response messageId:0:{"code":200,"reason":"mapgoo","messageId":0,"timestamp":"2018-11-01 10:52:46","result":{}}response messageId:0:{"code":200,"reason":"mapgoo","messageId":0,"timestamp":"2018-11-01 10:52:49","result":{}}response messageId:0:{"code":200,"reason":"mapgoo","messageId":0,"timestamp":"2018-11-01 10:52:52","result":{}}response messageId:0:{"code":200,"reason":"mapgoo","messageId":0,"timestamp":"2018-11-01 10:52:53","result":{}}response messageId:0:{"code":200,"reason":"mapgoo","messageId":0,"timestamp":"2018-11-01 10:52:55","result":{}}response messageId:0:{"code":200,"reason":"mapgoo","messageId":0,"timestamp":"2018-11-01 10:52:56","result":{}}response messageId:0:{"code":200,"reason":"mapgoo","messageId":0,"timestamp":"2018-11-01 11:28:40","result":{}}
