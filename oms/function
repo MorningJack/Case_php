@@ -1,0 +1,833 @@
+<?php
+// +----------------------------------------------------------------------
+// | ThinkPHP [ WE CAN DO IT JUST THINK ]
+// +----------------------------------------------------------------------
+// | Copyright (c) 2006-2016 http://thinkphp.cn All rights reserved.
+// +----------------------------------------------------------------------
+// | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
+// +----------------------------------------------------------------------
+// | Author: 流年 <liu21st@gmail.com>
+// +----------------------------------------------------------------------
+
+// 应用公共文件
+/**
+ * 输出json
+ * @param int $error 错误编码
+ * @param string $reason 错误描述
+ * @param null $result 数据
+ * @param bool $array 是否是数组
+ */
+function ajax_info($error = 0, $reason = 'success', $result = '', $array = true)
+{
+    header('Content-type: application/json;charset=utf-8');
+    if ($array) {
+        $json = json_encode(['error' => $error, 'reason' => $reason, 'result' => $result], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+    } else {
+        $json = json_encode(['error' => $error, 'reason' => $reason, 'result' => $result], JSON_FORCE_OBJECT | JSON_UNESCAPED_UNICODE);
+    }
+    exit($json);
+}
+
+/**
+ * 验证手机号码是否正确
+ * @param $mobile
+ * @return bool
+ */
+function isMobile($mobile)
+{
+    return preg_match('#^13[\d]{9}$|^14[5,7]{1}\d{8}$|^15[^4]{1}\d{8}$|^16[6]{1}\d{8}$|^17[0,3,6,7,8]{1}\d{8}$|^18[\d]{9}$|^19[8,9]{1}\d{8}$#', $mobile) ? true : false;
+}
+
+/**
+ * 验证用户名是否纯数字
+ * @param $userName
+ * @return bool
+ */
+function isUserName($userName)
+{
+    return preg_match('/^(?!\d+$).+$/i', $userName) ? true : false;
+}
+
+/**
+ * 获取随机字符串
+ * @param int $length
+ * @return string
+ */
+function getRandStr($length = 4)
+{
+    $chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    $str = '';
+    for ($i = 0; $i < $length; $i++) {
+        $str .= $chars[mt_rand(0, strlen($chars) - 1)];
+    }
+    return $str;
+}
+
+function moneyConvert($money)
+{
+    return sprintf("%.2f", $money / 100);
+    //return round($money / 100 , 2);
+}
+
+//微信支付数组转xml
+function arrayToXml($arr)
+{
+    header('Content-Type:text/xml; charset=utf-8');
+    $xml = "<xml>";
+    foreach ($arr as $key => $val) {
+        if (is_numeric($val)) {
+            $xml .= "<" . $key . ">" . $val . "</" . $key . ">";
+
+        } else
+            $xml .= "<" . $key . "><![CDATA[" . $val . "]]></" . $key . ">";
+    }
+    $xml .= "</xml>";
+    echo $xml;
+    exit;
+}
+
+function getClientIp()
+{
+    if (!empty($_SERVER["HTTP_CLIENT_IP"])) {
+        $cip = $_SERVER["HTTP_CLIENT_IP"];
+    } else if (!empty($_SERVER["HTTP_X_FORWARDED_FOR"])) {
+        $cip = $_SERVER["HTTP_X_FORWARDED_FOR"];
+    } else if (!empty($_SERVER["REMOTE_ADDR"])) {
+        $cip = $_SERVER["REMOTE_ADDR"];
+    } else {
+        $cip = '';
+    }
+    preg_match("/[\d\.]{7,15}/", $cip, $cips);
+    $cip = isset($cips[0]) ? $cips[0] : 'unknown';
+    unset($cips);
+
+    return $cip;
+}
+
+/**
+ * 计算两点地理坐标之间的距离
+ * @param  Decimal $longitude1 起点经度
+ * @param  Decimal $latitude1 起点纬度
+ * @param  Decimal $longitude2 终点经度
+ * @param  Decimal $latitude2 终点纬度
+ * @return Decimal
+ */
+function getDistance($longitude1, $latitude1, $longitude2, $latitude2)
+{
+
+    $EARTH_RADIUS = 6370.996; // 地球半径系数
+    $PI = 3.1415926;
+
+    $radLat1 = $latitude1 * $PI / 180.0;
+    $radLat2 = $latitude2 * $PI / 180.0;
+
+    $radLng1 = $longitude1 * $PI / 180.0;
+    $radLng2 = $longitude2 * $PI / 180.0;
+
+    $a = $radLat1 - $radLat2;
+    $b = $radLng1 - $radLng2;
+
+    $distance = 2 * asin(sqrt(pow(sin($a / 2), 2) + cos($radLat1) * cos($radLat2) * pow(sin($b / 2), 2)));
+    $distance = $distance * $EARTH_RADIUS * 1000;
+    return $distance;
+}
+
+function outExcel(&$data, $column, $title = '')
+{
+    \think\Loader::import('PHPExcel.PHPExcel', EXTEND_PATH);
+    $PHPExcel = new \PHPExcel();
+    $fileName = $xlsTitle = $title ? $title : date('Y-m-d H:i:s');
+
+    $count = count($column);
+    $c = 'A';
+    for ($i = 1; $i < $count; $i++) {
+        $c++;
+    }
+    $PHPExcel->setActiveSheetIndex(0);
+    $activeSheet = $PHPExcel->getActiveSheet();
+    $activeSheet->mergeCells('A1:' . $c . '1');
+    $activeSheet->setCellValue('A1', $fileName);
+    $activeSheet->getStyle('A1')->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+    $activeSheet->getStyle('A1')->getAlignment()->setVertical(\PHPExcel_Style_Alignment::VERTICAL_CENTER);
+
+    $c = 'A';
+    foreach ($column as $key => $value) {
+        $activeSheet->setCellValue($c . '2', $value);
+        $activeSheet->getColumnDimension($c)->setWidth(20);
+        $activeSheet->getStyle($c . '2')->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        $k = 3;
+        foreach ($data as $val) {
+            $activeSheet->setCellValue($c . $k, $val[$key]);
+            $activeSheet->getStyle($c . $k)->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+            $k++;
+        }
+        $c++;
+    }
+
+    header('pragma:public');
+    header('Content-type:application/vnd.ms-excel;charset=utf-8;name="' . $xlsTitle . '.xls"');
+    header("Content-Disposition:attachment;filename=$fileName.xls");
+    $objWriter = \PHPExcel_IOFactory::createWriter($PHPExcel, 'Excel5');
+    $objWriter->save('php://output');
+    exit;
+}
+
+function monthDiff($start, $end)
+{ //日期格式为2018-8-28
+    $date1 = explode('-', $start);
+    $date2 = explode('-', $end);
+
+    if ($date1[1] < $date2[1]) { //判断月份大小，进行相应加或减
+        $monthDiff = abs($date1[0] - $date2[0]) * 12 + abs($date1[1] - $date2[1]);
+    } else {
+        $monthDiff = abs($date1[0] - $date2[0]) * 12 - abs($date1[1] - $date2[1]);
+    }
+    return $monthDiff;
+}
+
+/**
+ * 计算两个日期相差天数
+ * @param string $startTime 开始时间
+ * @param string $endTime 结束时间
+ * @return float
+ */
+function dateDiff(&$startTime, &$endTime, $dateDiff)
+{
+    if ($dateDiff) {
+        $dateDiff += 1;
+        $endTime = date('Y-m-d');
+        $startTime = date('Y-m-d', strtotime('-' . $dateDiff . ' day'));
+    } else if ($startTime || $endTime) {
+        $diff = strtotime($endTime) - strtotime($startTime);
+        $dateDiff = round($diff / 3600 / 24);
+    } else {
+        $dateDiff = 31;
+        $endTime = date('Y-m-d');
+        $startTime = date('Y-m-d', strtotime('-' . $dateDiff . ' day'));
+    }
+    return $dateDiff;
+}
+
+/**
+ * @Name checkTokenExpire 检查过期时间
+ * @author jackwang
+ * @token 用户唯一令牌
+ * @return bool
+ */
+if (!function_exists('checkTokenExpire')) {
+    function checkTokenExpire($token)
+    {
+        $token = 'token_' . $token;
+        $tokenInfo = \think\Cache::get($token);
+        if ($tokenInfo) {
+            $expireTime = config('token.expire_time');
+            \think\Cache::set($token, $tokenInfo, $expireTime);
+            return true;
+        } else {
+            return false;
+        }
+    }
+}
+
+if (!function_exists('curlObjHandle')) {
+    /**
+     * NAME: curlObjHandle
+     * @author jackwang
+     * @param array $chList 已经开启ch句柄的数组
+     * @return array
+     */
+    function curlObjHandle(&$chList)
+    {
+        $responseData = [];
+        $downloader = curl_multi_init();
+        // 将三个待请求对象放入下载器中
+        foreach ($chList as $ch) {
+            curl_multi_add_handle($downloader, $ch);
+        }
+        // 轮询
+        do {
+            while (($execrun = curl_multi_exec($downloader, $running)) == CURLM_CALL_MULTI_PERFORM) ;
+            if ($execrun != CURLM_OK) {
+                break;
+            }
+            while ($done = curl_multi_info_read($downloader)) {
+                // 从请求中获取信息、内容、错误
+                $info = curl_getinfo($done['handle']);
+                $output = curl_multi_getcontent($done['handle']);
+                $error = curl_error($done['handle']);
+                if (!empty($error)) {
+                    \think\Log::error('请求错误信息：' . json_encode($error) . '--请求信息：' . json_encode($info));
+                }
+                // 将请求结果保存,我这里是打印出来
+                $responseData[] = json_decode($output, 1);
+                // 把请求已经完成了得 curl handle 删除
+                curl_multi_remove_handle($downloader, $done['handle']);
+            }
+            // 当没有数据的时候进行堵塞，把 CPU 使用权交出来，避免上面 do 死循环空跑数据导致 CPU 100%
+            if ($running) {
+                $rel = curl_multi_select($downloader, 1);
+                if ($rel == -1) {
+                    usleep(1000);
+                }
+            }
+            if ($running == false) {
+                break;
+            }
+        } while (true);
+        curl_multi_close($downloader);
+        return $responseData;
+    }
+}
+
+if (!function_exists('exchangeUrl')) {
+    /**
+     * NAME: exchangeUrl
+     * @param $url string 目标字段 xxx
+     * @param $re string 需要匹配的字段 http
+     * @param $exUrl string 需要拼接的字段 http://xxx.com
+     * @return string
+     */
+    function exchangeUrl($url, $exUrl)
+    {
+        if (empty($url)) return $url;
+        if (filter_var($url, FILTER_VALIDATE_URL) === false) {
+            $url = $exUrl . $url;
+        }
+        return $url;
+    }
+}
+
+if (!function_exists('setDefTimeVal')) {
+    /**
+     * NAME: setDefTimeVal 时间都为空：设置默认datenum
+     * @param $req array 请求参数
+     * @param $timeNum int 天数
+     * @return mixed
+     */
+    function setDefTimeVal($req, $timeNum)
+    {
+        if (empty($req['startTime']) && empty($req['dateNumber'])) {
+            return $timeNum;
+        }
+        return $req['dateNumber'];
+    }
+}
+
+if (!function_exists('getClientIP')) {
+    /**
+     * NAME: getClientIP 返回客户端ip
+     * @return string
+     */
+    function getClientIP()
+    {
+        //strcasecmp 比较两个字符，不区分大小写。返回0，>0，<0。
+        if (getenv('HTTP_CLIENT_IP') && strcasecmp(getenv('HTTP_CLIENT_IP'), 'unknown')) {
+            $ip = getenv('HTTP_CLIENT_IP');
+        } elseif (getenv('HTTP_X_FORWARDED_FOR') && strcasecmp(getenv('HTTP_X_FORWARDED_FOR'), 'unknown')) {
+            $ip = getenv('HTTP_X_FORWARDED_FOR');
+        } elseif (getenv('REMOTE_ADDR') && strcasecmp(getenv('REMOTE_ADDR'), 'unknown')) {
+            $ip = getenv('REMOTE_ADDR');
+        } elseif (isset($_SERVER['REMOTE_ADDR']) && $_SERVER['REMOTE_ADDR'] && strcasecmp($_SERVER['REMOTE_ADDR'], 'unknown')) {
+            $ip = $_SERVER['REMOTE_ADDR'];
+        }
+        $res = preg_match('/[\d\.]{7,15}/', $ip, $matches) ? $matches [0] : '';
+        return $res;
+    }
+}
+if (!function_exists('getTimeRang')) {
+    /**
+     * NAME: getTimeMap 返回查询日期范围
+     * @param $req
+     * @return array
+     */
+    function getTimeRang($req, $default = 7, $mode = 1)
+    {
+        if (!$req['startTime'] && !$req['endTime']) {
+            $req['dateNumber'] = empty($req['dateNumber']) ? $default : $req['dateNumber'];
+        }
+        $dateUnit = dateUnit(dateDiff($req['startTime'], $req['endTime'], $req['dateNumber']));
+        $dateArray = dateArray($dateUnit, $req['startTime'], $req['endTime']);
+        if ($req['dateNumber'] == 0) {
+            return ['between', [$req['startTime'], $req['endTime']]];
+        } else {
+            return ['between', [$dateArray[0], date('Y-m-d H:i:s', strtotime('+1' . $dateUnit['unit'], strtotime($dateArray[count($dateArray) - 1])) - 1)]];
+        }
+    }
+}
+
+if (!function_exists('pdoHander')) {
+    /**
+     * pdo连接句柄
+     * @param $database
+     * @param $tableName
+     * @param string $config
+     * @return \think\db\Query
+     */
+    function pdoHander($database, $config = 'omsMysql')
+    {
+        $dbconfig = \think\Config::get('database.' . $config);
+        $dbconfig['database'] = $database;
+        try {
+            $DB = \think\Db::connect($dbconfig)->connect();
+        } catch (Exception $e) {
+            ajax_info('1', 'error');
+        }
+        return $DB;
+    }
+}
+
+if (!function_exists('qrCode')) {
+    /**
+     * NAME: qrCode 生成二维码图片
+     * @param $url
+     */
+    function qrCode($url)
+    {
+        import('kairos.phpqrcode.qrlib');
+        $object = new \QRcode();
+        ob_end_clean();
+        $level = 4;
+        $size = 8;
+        $errorCorrectionLevel = intval($level);//容错级别
+        $matrixPointSize = intval($size);//生成图片大小
+        $object->png($url, false, $errorCorrectionLevel, $matrixPointSize, 2);
+    }
+}
+
+if (!function_exists('millisecond')) {
+    /**
+     * NAME: getMillisecond 获取毫秒时间戳
+     * @return float
+     */
+    function millisecond()
+    {
+        list($s1, $s2) = explode(' ', microtime());
+        return (float)sprintf('%.0f', (floatval($s1) + floatval($s2)) * 1000);
+    }
+}
+
+if (!function_exists('categoryTree')) {
+    /**
+     * 数据数组设置层级.
+     *
+     * @param array $category 数据数组.
+     * @param string $parent_id 父级id.
+     * @param string $level 层级id.
+     *
+     * @return array.
+     */
+    function categoryTree($category, $parent_id = 0, $level = 0)
+    {
+        static $res = array();
+        foreach ($category as $v) {
+            if ($v['ParentHoldID'] == $parent_id) {
+                $v['level'] = $level;
+                $res[] = $v;
+                categoryTree($category, $v['HoldID'], $level + 1);
+            }
+        }
+        return $res;
+    }
+}
+
+if (!function_exists('defaultPageSet')) {
+    /**
+     * NAME: defaultPageSet 设置默认page参数 可以固定格式
+     * @param $req
+     */
+    function defaultPageSet(&$req)
+    {
+        $req['pageNum'] = isset($req['pageNum']) ? $req['pageNum'] : 0;
+        $req['pageSize'] = isset($req['pageSize']) ? $req['pageSize'] : 10;
+    }
+}
+
+if (!function_exists('checkEmpty')) {
+    function checkEmpty($data)
+    {
+        if (empty($data)) {
+            return [];
+        }
+    }
+}
+if (!function_exists('authcode')) {
+    /**
+     * 加/解密字符串
+     * @param $string  需要加密/解密字符串
+     * @param string $operation DECODE表示解密,ENCODE表示加密
+     * @param string $key 加密密钥
+     * @param int $expiry 有效时间
+     * @return bool|string
+     */
+    function authcode($string, $operation = 'DECODE', $key = 'mapgoo.net', $expiry = 0)
+    {
+        if ($operation == 'DECODE') {
+            $string = base64_decode(str_replace(['-', '_'], ['+', '/'], $string));
+        }
+        // 动态密匙长度，相同的明文会生成不同密文就是依靠动态密匙
+        $ckey_length = 4;
+
+        // 密匙
+        $key = md5($key);
+
+        // 密匙a会参与加解密
+        $keya = md5(substr($key, 0, 16));
+        // 密匙b会用来做数据完整性验证
+        $keyb = md5(substr($key, 16, 16));
+        // 密匙c用于变化生成的密文
+        $keyc = $ckey_length ? ($operation == 'DECODE' ? substr($string, 0, $ckey_length) :
+            substr(md5(microtime()), -$ckey_length)) : '';
+        // 参与运算的密匙
+        $cryptkey = $keya . md5($keya . $keyc);
+        $key_length = strlen($cryptkey);
+        // 明文，前10位用来保存时间戳，解密时验证数据有效性，10到26位用来保存$keyb(密匙b)，
+        //解密时会通过这个密匙验证数据完整性
+        // 如果是解码的话，会从第$ckey_length位开始，因为密文前$ckey_length位保存 动态密匙，以保证解密正确
+        $string = $operation == 'DECODE' ? base64_decode(substr($string, $ckey_length)) :
+            sprintf('%010d', $expiry ? $expiry + time() : 0) . substr(md5($string . $keyb), 0, 16) . $string;
+        $string_length = strlen($string);
+        $result = '';
+        $box = range(0, 255);
+        $rndkey = array();
+        // 产生密匙簿
+        for ($i = 0; $i <= 255; $i++) {
+            $rndkey[$i] = ord($cryptkey[$i % $key_length]);
+        }
+        // 用固定的算法，打乱密匙簿，增加随机性，好像很复杂，实际上对并不会增加密文的强度
+        for ($j = $i = 0; $i < 256; $i++) {
+            $j = ($j + $box[$i] + $rndkey[$i]) % 256;
+            $tmp = $box[$i];
+            $box[$i] = $box[$j];
+            $box[$j] = $tmp;
+        }
+        // 核心加解密部分
+        for ($a = $j = $i = 0; $i < $string_length; $i++) {
+            $a = ($a + 1) % 256;
+            $j = ($j + $box[$a]) % 256;
+            $tmp = $box[$a];
+            $box[$a] = $box[$j];
+            $box[$j] = $tmp;
+            // 从密匙簿得出密匙进行异或，再转成字符
+            $result .= chr(ord($string[$i]) ^ ($box[($box[$a] + $box[$j]) % 256]));
+        }
+        if ($operation == 'DECODE') {
+            // 验证数据有效性，请看未加密明文的格式
+            if ((substr($result, 0, 10) == 0 || substr($result, 0, 10) - time() > 0) &&
+                substr($result, 10, 16) == substr(md5(substr($result, 26) . $keyb), 0, 16)) {
+                return substr($result, 26);
+            } else {
+                return '';
+            }
+        } else {
+            // 把动态密匙保存在密文里，这也是为什么同样的明文，生产不同密文后能解密的原因
+            // 因为加密后的密文可能是一些特殊字符，复制过程可能会丢失，所以用base64编码
+            //str_replace('=', '', base64_encode($result))
+            $str = $keyc . base64_encode($result);
+            return str_replace(['+', '/'], ['-', '_'], base64_encode($str));
+        }
+    }
+}
+
+if (!function_exists('filterEmoji')) {
+    function filterEmoji($str)
+    {
+        $str = preg_replace_callback('/./u',
+            function (array $match) {
+                return strlen($match[0]) >= 4 ? '' : $match[0];
+            },
+            $str);
+
+        return $str;
+    }
+}
+
+/**
+ * 返回月的第一天和最后一天
+ */
+if (!function_exists('monthSN')) {
+    function monthSN($month = '')
+    {
+        if (!$month) {
+            $month = date('Y-m-d', time());
+        }
+        $monthStart = date('Y-m-01 00:00:00', strtotime($month));
+        $MonthEnd = date('Y-m-d 23:59:59', strtotime("$monthStart +1 month -1 day"));
+        return array($monthStart, $MonthEnd);
+    }
+}
+
+/**
+ * 字节单位转换
+ */
+if (!function_exists('calc')) {
+    function calc($size, $digits = 2)
+    {
+        $unit = array('K', 'M', 'G', 'T', 'P');
+        $base = 1024;
+        $i = floor(log($size, $base));
+        $n = count($unit);
+        if ($i >= $n) {
+            $i = $n - 1;
+        }
+        $pow = (pow($base, $i) != 0) ? pow($base, $i) : 1;
+        return round($size / $pow, $digits) . ' ' . $unit[$i] . 'B';
+    }
+}
+/**
+ * 获取上月开始时间戳
+ */
+if (!function_exists('monthStart')) {
+    function monthStart($month = '')
+    {
+        if ($month) {
+            return strtotime(date('Y-m-01', strtotime($month)));
+        }
+        return strtotime(date('Y-m-01', strtotime('-1 month')));
+    }
+}
+
+/**
+ * 获取一年的开始时间
+ */
+if (!function_exists('yearStart')) {
+    function yearStart($year = '')
+    {
+        if (!$year) {
+            return strtotime(date('Y-01-01'));
+        }
+        return strtotime(date('Y-01-01', strtotime($year)));
+
+    }
+}
+/**
+ * 获取一年所有的月份
+ */
+if (!function_exists('currentYear')) {
+    function currentYear($year = '')
+    {
+        if (!$year) {
+            $year = date('Y', time());
+        } else {
+            if (!strpos($year, '-')) {
+                $year .= '-01';
+            }
+        }
+        $curentMonth = date('Ym', time());
+        $months = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
+        $date = date('Y', strtotime($year));
+        $month = [];
+        foreach ($months as $v) {
+            $month[] = $date . $v;
+        }
+        return $month;
+    }
+}
+
+/**
+ * 当前月往前推2个月
+ */
+if (!function_exists('threeMonth')) {
+    function threeMonth($req = '')
+    {
+        if (!$req) {
+            $req = date('Y-m', time());
+        }
+        $arr = [];
+        for ($i = 0; $i < 3; $i++) {
+            $arr[] = date('Y-m', strtotime('-' . $i . ' month', strtotime($req)));
+        }
+        return $arr;
+    }
+}
+
+
+/**
+ * @desc 多维数组转化为一维数组
+ * @param $array 多维数组
+ * @return array 一维数组
+ */
+if (!function_exists('arrayMulti2single')) {
+    function arrayMulti2single($array)
+    {
+        static $result_array = array();
+        foreach ($array as $value) {
+            if (is_array($value)) {
+                arrayMulti2single($value);
+            } else
+                $result_array [] = $value;
+        }
+        return $result_array;
+    }
+}
+
+/**
+ * @desc 随机字符串生成
+ * @param int $len 生成的字符串长度
+ * @return string
+ */
+if (!function_exists('randomString')) {
+    function randomString($len = 6)
+    {
+        $chars = array(
+            "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k",
+            "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v",
+            "w", "x", "y", "z", "A", "B", "C", "D", "E", "F", "G",
+            "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R",
+            "S", "T", "U", "V", "W", "X", "Y", "Z", "0", "1", "2",
+            "3", "4", "5", "6", "7", "8", "9"
+        );
+        $charsLen = count($chars) - 1;
+        shuffle($chars);    // 将数组打乱
+        $output = "";
+        for ($i = 0; $i < $len; $i++) {
+            $output .= $chars[mt_rand(0, $charsLen)];
+        }
+        return $output;
+    }
+}
+
+
+if (!function_exists('generalOrderNum')) {
+    /**
+     * NAME: generalOrderNum 获取订单号
+     * @return string
+     */
+    function generalOrderNum()
+    {
+        $yCode = array('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J');
+        return $yCode[intval(date('Y')) - 2011] . strtoupper(dechex(date('m'))) . date('d') . substr(time(), -5) . substr(microtime(), 2, 5) . sprintf('%02d', rand(0, 99));
+    }
+}
+
+
+if (!function_exists('singleSameKey')) {
+    /**
+     * @desc 将二维数组以元素的某个值作为键
+     * array( array('name'=>'aa','type'=>'pay'), array('name'=>'cc','type'=>'pay') )
+     * array('pay'=>array( 'name'=>'aa','type'=>'pay' , 'name'=>'cc','type'=>'pay'))
+     * @param $arr 数组
+     * @param $key 分组值的key
+     * @return array
+     */
+    function singleSameKey($arr, $key)
+    {
+        $new_arr = array();
+        foreach ($arr as $k => $v) {
+            $new_arr[$v[$key]] = $v;
+        }
+        return $new_arr;
+    }
+}
+
+if (!function_exists('arraySameKey')) {
+    /**
+     * @desc 将二维数组以元素的某个值作为键
+     * array( array('name'=>'aa','type'=>'pay'), array('name'=>'cc','type'=>'pay') )
+     * array('pay'=>array( 'name'=>'aa','type'=>'pay' , 'name'=>'cc','type'=>'pay'))
+     * @param $arr 数组
+     * @param $key 分组值的key
+     * @return array
+     */
+    function arraySameKey($arr, $key)
+    {
+        $new_arr = array();
+        foreach ($arr as $k => $v) {
+            $new_arr[$v[$key]][] = $v;
+        }
+        return $new_arr;
+    }
+}
+
+
+if (!function_exists('checkSearchField')) {
+    /**
+     * @param array $req 请求参数的数组
+     * @param array $allowField 需要筛选的字段
+     */
+    function checkSearchField($req, $allowField)
+    {
+        if (!empty($req['searchField']) && !empty($req['searchText'])) {
+            if (!in_array($req['searchField'], $allowField)) {
+                ajax_info(1, '筛选有误,没有' . $req['searchField'] . '字段');
+            }
+        }
+    }
+}
+
+
+if (!function_exists('crc16')) {
+    function crc16($string, $crc = 0)
+    {
+
+        for ($x = 0; $x < strlen($string); $x++) {
+
+            $crc = $crc ^ ord($string[$x]);
+            for ($y = 0; $y < 8; $y++) {
+
+                if (($crc & 0x0001) == 0x0001) $crc = (($crc >> 1) ^ 0xA001);
+                else                             $crc = $crc >> 1;
+            }
+        }
+
+        return $crc;
+    }
+}
+
+/**
+ * 判断是否微信浏览器
+ * @return bool
+ */
+function isWeixin()
+{
+    if (strpos($_SERVER['HTTP_USER_AGENT'], 'MicroMessenger') !== false) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+/**
+ * 时间戳转换成 各个单位
+ */
+if (!function_exists('time2string')) {
+    function time2string($second)
+    {
+        $day = floor($second / (3600 * 24));
+        $second = $second % (3600 * 24);
+        $hour = floor($second / 3600);
+        $second = $second % 3600;
+        $minute = floor($second / 60);
+        $second = $second % 60;
+
+        return ['day' => $day, 'hour' => $hour, 'minute' => $minute, 'second' => $second];
+    }
+}
+
+/**
+ * 是否是时间格式
+ */
+if (!function_exists('isDateTime')) {
+    function isDateTime($date)
+    {
+        if (date('Y-m-d H:i:s', strtotime($date)) == $date) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+}
+
+function arrayToInt(&$array)
+{
+    foreach ($array as $k => $v){
+        if(is_array($array[$k])){
+            arrayToInt($array[$k]);
+        }else{
+            $array[$k] = (int)$v;
+        }
+    }
+    return false;
+}
+
+
+
