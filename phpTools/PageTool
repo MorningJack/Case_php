@@ -1,0 +1,14 @@
+<?php
+
+    function pagination(&$list, $currentPage, $pageSize, $count)
+    {
+        return [
+            'list' => $list,
+            'pagination' => [
+                'page_size' => $pageSize,
+                'current_page' => $currentPage,
+                'count' => $count,
+                'pages' => ceil($count / $pageSize),
+            ]
+        ];
+    }
